@@ -9,7 +9,7 @@
   "workflow": "Import only demographic details, derive adult age from the source birth date, and explicitly reveal an entertainment date calculated from published population life expectancy. No medical diagnoses or individual mortality prediction.",
   "organizationSlug": "whenwillidie-club",
   "repository": "https://github.com/whenwillidie-club/app",
-  "liveUrl": "https://whenwillidie.onrender.com/",
+  "liveUrl": "https://whenwillidieclub.com/",
   "repositoryStatus": "public",
   "renderStatus": "live",
   "homepage": "individually designed full website",
@@ -38,11 +38,11 @@
     ],
     [
       "The published table",
-      "The calculation uses the SSA 2023 period life table associated with the 2026 Trustees Report. The default is an equal average of its male and female remaining-life-expectancy columns for the relevant age. It does not infer a person’s gender from a record. This default is an arithmetic choice for the experience, not a personalized actuarial model."
+      "The calculation uses the SSA 2023 period life table associated with the 2026 Trustees Report. The default is an equal average of its male and female remaining-life-expectancy columns for the relevant age. It does not infer a person\u2019s gender from a record. This default is an arithmetic choice for the experience, not a personalized actuarial model."
     ],
     [
       "From expectancy to a calendar",
-      "The app adds the selected table expectancy to the calculation date to display a playful future date. That operation does not supply information about the circumstances or actual timing of anyone’s death. Different table choices and assumptions can yield different dates. The visitor must acknowledge the entertainment limitation and explicitly choose to reveal the result."
+      "The app adds the selected table expectancy to the calculation date to display a playful future date. That operation does not supply information about the circumstances or actual timing of anyone\u2019s death. Different table choices and assumptions can yield different dates. The visitor must acknowledge the entertainment limitation and explicitly choose to reveal the result."
     ],
     [
       "The birthday connection",

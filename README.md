@@ -2,7 +2,7 @@
 
 Explore a playful calendar date from adult age and a published population life table. WhenWillIDie is entertainment, never a prediction of your actual death.
 
-**Site:** https://whenwillidie.onrender.com/  
+**Site:** https://whenwillidieclub.com/
 **Repository:** https://github.com/whenwillidie-club/app
 
 ## Production integration
@@ -45,13 +45,13 @@ CSP `connect-src` must allow only `https://finchapps-connect.onrender.com`. Depl
 
 ## Privacy and verification
 
-Read [the data-handling notice](https://whenwillidie.onrender.com/privacy.html). No clinical record is saved in browser storage; visible data is held in memory, cleared on hiding the page, and periodically revalidated. No browser agent tools expose medical data. Unit tests validate production envelopes and preserve source values. Backend tests cover origin/session isolation, scope checks, invalid environments, expiration and signed revocation without using real medical data.
+Read [the data-handling notice](https://whenwillidieclub.com/privacy.html). No clinical record is saved in browser storage; visible data is held in memory, cleared on hiding the page, and periodically revalidated. No browser agent tools expose medical data. Unit tests validate production envelopes and preserve source values. Backend tests cover origin/session isolation, scope checks, invalid environments, expiration and signed revocation without using real medical data.
 
 A real patient must perform their own EHR authentication and consent; these tests do not claim successful patient connectivity. Availability varies by healthcare organization.
 
-## Domain candidate
+## Custom domain
 
-`whenwillidieclub.com` was available on September 8, 2026; Porkbun displayed $11.08 for initial registration and renewal. No domain was purchased. Availability and price can change. Add it to Render and the backend's explicit origin allowlist before use.
+`whenwillidieclub.com` is registered through Squarespace and assigned to this Render site. DNS uses an apex A record pointing to `216.24.57.1` and a `www` CNAME pointing to `whenwillidie.onrender.com`. Render redirects `www` to the apex domain and manages HTTPS certificates.
 
 ## Calculation and evidence boundary
 
@@ -72,9 +72,9 @@ The navigation tool was verified in a supported browser WebMCP context: invalid 
 <!-- public-discovery -->
 ## Public guide and project context
 
-[How the playful date is calculated](https://whenwillidie.onrender.com/guides/how-the-playful-date-is-calculated.html) — The inputs, arithmetic and deliberate limitations behind an entertainment-only population life expectancy date.
+[How the playful date is calculated](https://whenwillidieclub.com/guides/how-the-playful-date-is-calculated.html) — The inputs, arithmetic and deliberate limitations behind an entertainment-only population life expectancy date.
 
-[Search WhenWillIDie guides](https://whenwillidie.onrender.com/guides/) · [About the site](https://whenwillidie.onrender.com/about.html) · [Sitemap](https://whenwillidie.onrender.com/sitemap.xml)
+[Search WhenWillIDie guides](https://whenwillidieclub.com/guides/) · [About the site](https://whenwillidieclub.com/about.html) · [Sitemap](https://whenwillidieclub.com/sitemap.xml)
 
 WhenWillIDie is a standalone product with its own interface, documentation and repository, prepared for independent business operation and continued development. Its FinchNode integration is documented in the code. Live production activation remains pending.
 
@@ -82,7 +82,7 @@ WhenWillIDie is a standalone product with its own interface, documentation and r
 
 Edit `content/seo.json` for reviewed article text and site metadata. `npm run build` generates public HTML pages, a sitemap, social metadata and structured data, then prerenders the actual React homepage. `npm run test:seo` checks the built crawl surface after a build. Public guide search filters only public text in the browser; no patient data or search analytics enter the index.
 
-Keep canonical URLs on the deployed origin until a custom domain is registered and configured. Add only public, canonical pages to the sitemap. Validate links, mobile layout and the built HTML after editorial changes. Search engine indexing and rich results are not guaranteed.
+Keep canonical URLs on the custom domain configured in `content/seo.json`. Add only public, canonical pages to the sitemap. Validate links, mobile layout and the built HTML after editorial changes. Search engine indexing and rich results are not guaranteed.
 
 ## Independent business handoff
 

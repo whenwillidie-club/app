@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://whenwillidie.onrender.com/sitemap.xml
+Sitemap: https://whenwillidieclub.com/sitemap.xml
