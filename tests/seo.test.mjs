@@ -5,7 +5,7 @@ import {resolve,dirname} from 'node:path';
 import vm from 'node:vm';
 const site=JSON.parse(readFileSync('content/seo.json','utf8'));
 const read=path=>readFileSync('dist/'+path,'utf8');
-const pages=['index.html','guides/index.html',`guides/${site.article}.html`,'about.html','privacy.html'];
+const pages=['index.html','guides/index.html',`guides/${site.article}.html`,...(site.articles||[]).map(a=>`guides/${a.slug}.html`),'about.html','privacy.html'];
 const canonicals=new Set();
 test('all public pages have unique canonical URLs, readable HTML and matching metadata',()=>{
  for(const path of pages){
@@ -50,7 +50,7 @@ test('internal public links and assets resolve inside the deployment',()=>{
 });
 test('sitemap is limited to public canonical pages and discoverable from robots.txt',()=>{
  const xml=read('sitemap.xml');const urls=[...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);
- assert.equal(urls.length,5);assert.equal(new Set(urls).size,5);
+ assert.equal(urls.length,pages.length);assert.equal(new Set(urls).size,pages.length);
  assert.ok(urls.every(url=>!url.includes('#')&&!url.includes('404')&&!url.includes('import')));
  for(const page of pages){const canonical=read(page).match(/rel="canonical" href="([^"]+)"/)[1];assert.ok(urls.includes(canonical));}
  assert.ok(read('robots.txt').includes(`Sitemap: ${site.liveUrl}sitemap.xml`));
@@ -68,4 +68,20 @@ test('guide search handles multiple words, case, empty input and no results with
  input.value='<script>';events.input();assert.ok(rows.every(r=>r.hidden));assert.equal(empty.hidden,false);
  input.value='';events.input();assert.ok(rows.every(r=>!r.hidden));assert.equal(count.textContent,'2 public pages');assert.equal(empty.hidden,true);
  let prevented=false;events.submit({preventDefault:()=>prevented=true});assert.ok(prevented);
+});
+
+test('every added guide is discoverable from home, search and related guides with accurate article metadata',()=>{
+ const home=read('index.html'),index=read('guides/index.html');
+ const articles=[{slug:site.article,title:site.headline,published:'2026-09-08'},...site.articles];
+ for(const article of articles){
+  const path=`guides/${article.slug}.html`,html=read(path),url=site.liveUrl+path;
+  assert.ok(home.includes(`href="/${path}"`));assert.ok(index.includes(`href="/${path}"`));
+  const graph=JSON.parse(html.match(/type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+  const node=graph.find(n=>n['@type']==='Article');assert.equal(node.headline,article.title);assert.equal(node.mainEntityOfPage,url);assert.equal(node.datePublished,article.published);
+  const crumbs=graph.find(n=>n['@type']==='BreadcrumbList').itemListElement;assert.deepEqual(crumbs.map(c=>c.item),[site.liveUrl,site.liveUrl+'guides/',url]);
+  for(const other of articles.filter(a=>a.slug!==article.slug))assert.ok(html.includes(`href="/guides/${other.slug}.html"`));
+  for(const link of html.matchAll(/href="#([^" ]+)"/g))assert.ok(html.includes(`id="${link[1]}"`),'broken article anchor '+link[1]);
+  if(article.finchnode)assert.ok(html.includes(`href="${article.finchnode.url}"`));
+  for(const q of article.questions||[])assert.ok(html.includes(q.question.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll("'",'&#39;')));
+ }
 });

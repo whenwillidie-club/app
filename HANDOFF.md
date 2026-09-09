@@ -26,6 +26,6 @@ The business should verify its live origin in Google Search Console and Bing Web
 
 ## Editorial maintenance
 
-Keep the guide specific to WhenWillIDie. Describe actual product decisions and user workflows, and check FinchNode references against the implementation. Add a new guide when it answers a real product question. Update article dates when content changes substantively. Public search and the sitemap are generated in `scripts/build-pages.mjs`; add new public pages there when the content library grows.
+Keep the guide specific to WhenWillIDie. Describe actual product decisions and user workflows, and check FinchNode references against the implementation. Add a new guide when it answers a real product question. Update article dates when content changes substantively. Add new entries to the `articles` array in `content/seo.json`. Public search, homepage links, related guides, article metadata and the sitemap are generated automatically. Keep each article’s publication date stable and set `modified` only after a substantive revision.
 
 Run `npm run build` followed by `npm test` before deployment. Inspect the homepage and guide at phone and desktop widths. Confirm that the deployed HTML includes the public content, the sitemap lists the intended origin, guide search works, and private imports remain outside the public index.

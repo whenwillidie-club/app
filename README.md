@@ -87,3 +87,10 @@ Keep canonical URLs on the custom domain configured in `content/seo.json`. Add o
 ## Independent business handoff
 
 [Business handoff](HANDOFF.md) covers product identity, the receiving business’s production setup, domain migration, search verification and ongoing editorial maintenance.
+
+## More product guides
+
+Understand the playful date, compare the available population references, and see why the app requests demographics rather than a medical history.
+
+- [Why your playful life-expectancy date can change](https://whenwillidieclub.com/guides/why-the-playful-date-changes.html) — See how completed age, the calculation day and the selected population reference affect WhenWillIDie’s entertainment-only date.
+- [Why WhenWillIDie only requests demographics](https://whenwillidieclub.com/guides/why-the-app-only-requests-demographics.html) — Understand the narrow record scope behind WhenWillIDie’s age-based entertainment calculation and what it deliberately does not analyze.

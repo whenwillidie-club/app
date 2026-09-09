@@ -38,11 +38,11 @@
     ],
     [
       "The published table",
-      "The calculation uses the SSA 2023 period life table associated with the 2026 Trustees Report. The default is an equal average of its male and female remaining-life-expectancy columns for the relevant age. It does not infer a person\u2019s gender from a record. This default is an arithmetic choice for the experience, not a personalized actuarial model."
+      "The calculation uses the SSA 2023 period life table associated with the 2026 Trustees Report. The default is an equal average of its male and female remaining-life-expectancy columns for the relevant age. It does not infer a person’s gender from a record. This default is an arithmetic choice for the experience, not a personalized actuarial model."
     ],
     [
       "From expectancy to a calendar",
-      "The app adds the selected table expectancy to the calculation date to display a playful future date. That operation does not supply information about the circumstances or actual timing of anyone\u2019s death. Different table choices and assumptions can yield different dates. The visitor must acknowledge the entertainment limitation and explicitly choose to reveal the result."
+      "The app adds the selected table expectancy to the calculation date to display a playful future date. That operation does not supply information about the circumstances or actual timing of anyone’s death. Different table choices and assumptions can yield different dates. The visitor must acknowledge the entertainment limitation and explicitly choose to reveal the result."
     ],
     [
       "The birthday connection",
@@ -53,5 +53,125 @@
     "SSA 2023 period life table",
     "https://www.ssa.gov/OACT/STATS/table4c6.html"
   ],
-  "googleVerification": "TMdY5YFKPrSoVv3fC5iyCopvPVAm9JPLyi2OVYoBrOk"
+  "googleVerification": "TMdY5YFKPrSoVv3fC5iyCopvPVAm9JPLyi2OVYoBrOk",
+  "guideIntro": "Understand the playful date, compare the available population references, and see why the app requests demographics rather than a medical history.",
+  "finchnodeContext": "WhenWillIDie uses FinchNode only for its authorized demographics handoff. The entertainment calculation is separate code based on a published population life table; FinchNode does not provide the table or make a personal longevity prediction.",
+  "articles": [
+    {
+      "slug": "why-the-playful-date-changes",
+      "title": "Why your playful life-expectancy date can change",
+      "description": "See how completed age, the calculation day and the selected population reference affect WhenWillIDie’s entertainment-only date.",
+      "published": "2026-09-09",
+      "sections": [
+        {
+          "heading": "The display follows a reproducible calculation",
+          "paragraphs": [
+            "WhenWillIDie derives completed age from the supplied birth date using the current UTC date. It selects a remaining-years value from the bundled reference table, converts that value to days and adds it to the calculation date. The calendar output follows those inputs; it is not a measurement of someone’s remaining life."
+          ]
+        },
+        {
+          "heading": "Changing the reference changes the input",
+          "paragraphs": [
+            "The interface offers an equal average, the male table and the female table. These are alternative population references. The equal average is a calculation choice in this app, not an official combined-population estimate or a gender assignment."
+          ]
+        },
+        {
+          "heading": "The calendar itself is another input",
+          "paragraphs": [
+            "A calculation made on another day can produce a different displayed date. Crossing a completed-age boundary can also select a different row. The implementation uses integer ages rather than interpolating a fractional age between rows."
+          ],
+          "items": [
+            "Check which population reference is selected.",
+            "Remember that the calculation uses today’s UTC date.",
+            "Treat the precise calendar day as the result of arithmetic.",
+            "Skip the reveal if the framing is uncomfortable."
+          ]
+        },
+        {
+          "heading": "A comparison is about assumptions",
+          "paragraphs": [
+            "The reference controls make a simple assumption visible. They do not incorporate diagnoses, behavior, treatment or future changes in population mortality. The app supplies no personal confidence interval. The published SSA table is the reference source; the project’s calculation code explains how it becomes a date."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "Does a later displayed date mean my health improved?",
+          "answer": "No. This app does not assess health changes. Its output changes with the calculation inputs."
+        },
+        {
+          "question": "Does the average setting infer my gender?",
+          "answer": "No. It takes an equal arithmetic average of two table columns without inferring gender from a record."
+        }
+      ],
+      "references": [
+        {
+          "label": "WhenWillIDie interface implementation",
+          "url": "https://github.com/whenwillidie-club/app/blob/main/app/view.tsx"
+        },
+        {
+          "label": "Calculation and bundled reference table",
+          "url": "https://github.com/whenwillidie-club/app/blob/main/app/life-table.mjs"
+        }
+      ]
+    },
+    {
+      "slug": "why-the-app-only-requests-demographics",
+      "title": "Why WhenWillIDie only requests demographics",
+      "description": "Understand the narrow record scope behind WhenWillIDie’s age-based entertainment calculation and what it deliberately does not analyze.",
+      "published": "2026-09-09",
+      "sections": [
+        {
+          "heading": "Start with the input the calculation actually uses",
+          "paragraphs": [
+            "The implemented estimate needs a birth date to derive completed adult age. It does not use medications, diagnoses, lab results, allergies or encounter history. Requesting those categories would not improve this particular calculation because the function has no model that consumes them."
+          ]
+        },
+        {
+          "heading": "Enforce the category boundary in the server",
+          "paragraphs": [
+            "The application’s allowed scope is demographics. The server rejects categories outside that site’s allowlist rather than trusting a browser to request anything it chooses. The authorization flow still asks the visitor to review the actual registered application and sharing purpose."
+          ]
+        },
+        {
+          "heading": "Reject inputs that cannot support the experience",
+          "paragraphs": [
+            "The calculation rejects missing, invalid or future birth dates and completed ages outside 18 through 100. It does not substitute a guessed birthday. The interface also requires the visitor to acknowledge the entertainment limitation and explicitly reveal the date."
+          ]
+        },
+        {
+          "heading": "Keep the prediction claim out of the product",
+          "paragraphs": [
+            "A future operator can redesign the experience without implying that a narrow demographics import becomes a medical prognosis. The current code has no individual mortality model or clinical validation. Live record imports require production activation; the public guides and source explain the boundaries before a visitor connects."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "Does the app analyze my medical history?",
+          "answer": "No. This implementation requests demographics only and uses the supplied birth date to derive age."
+        },
+        {
+          "question": "Will it guess an age if the birthday is missing?",
+          "answer": "No. Invalid or unsupported input produces no date to reveal."
+        }
+      ],
+      "finchnode": {
+        "heading": "FinchNode connects the input, not the crystal ball",
+        "text": "The FinchNode handoff in this project supplies authorized demographics to the connection service. The table lookup and reveal interaction belong to WhenWillIDie. This separation makes the integration’s limited role clear without implying that the connection provider endorses the entertainment output.",
+        "label": "FinchNode’s authorized record access",
+        "url": "https://finchnode.com/"
+      },
+      "references": [
+        {
+          "label": "WhenWillIDie interface implementation",
+          "url": "https://github.com/whenwillidie-club/app/blob/main/app/view.tsx"
+        },
+        {
+          "label": "Calculation and bundled reference table",
+          "url": "https://github.com/whenwillidie-club/app/blob/main/app/life-table.mjs"
+        }
+      ]
+    }
+  ]
 }
