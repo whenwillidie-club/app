@@ -1,3 +1,4 @@
+import seo from '../content/seo.json';
 import React,{useEffect,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {RefreshCw,ArrowUpRight,Command} from 'lucide-react';
@@ -15,6 +16,7 @@ function App(){
  useEffect(()=>{const change=()=>{setRoute(window.location.hash);if(window.location.hash.startsWith('#/'))window.scrollTo(0,0)};window.addEventListener('hashchange',change);return()=>window.removeEventListener('hashchange',change)},[]);
  useEffect(()=>registerNavigation((document as any).modelContext,async()=>{window.location.hash='/import';await new Promise(resolve=>requestAnimationFrame(resolve));}),[]);
  const importing=route==='#/import';
+ useEffect(()=>{document.title=importing?`${config.title} | Private record workspace`:`${config.title} | ${seo.subject}`;document.querySelector('meta[name=robots]')?.setAttribute('content',importing?'noindex,nofollow,nosnippet':'index,follow,max-image-preview:large');},[importing]);
  const[data,setData]=useState<any>(null),[error,setError]=useState(''),[loading,setLoading]=useState(false),[token,setToken]=useState(()=>sessionStorage.getItem(sessionKey)||''),[revision,setRevision]=useState(0),[state,setState]=useState(''),[selected,setSelected]=useState<string[]>(config.categories),[hidden,setHidden]=useState(document.hidden);
  useEffect(()=>{const fn=()=>{setHidden(document.hidden);setData(null);if(!document.hidden)setRevision(n=>n+1)};document.addEventListener('visibilitychange',fn);return()=>document.removeEventListener('visibilitychange',fn)},[]);
  useEffect(()=>{if(!token||hidden||!importing){setData(null);return;}const controller=new AbortController();let timer:any;setLoading(true);setError('');(async()=>{try{const s=await request('/session',{token,signal:controller.signal});setState(s.status+' · '+s.syncStatus);if(s.status==='completed'){const result=await request('/records',{token,signal:controller.signal});if(!controller.signal.aborted)setData(validateRecord(result));}}catch(e:any){if(!controller.signal.aborted){setError(e.message);setData(null);if([401,403,410].includes(e.status)){sessionStorage.removeItem(sessionKey);setToken('')}}}finally{if(!controller.signal.aborted){setLoading(false);timer=setTimeout(()=>setRevision(n=>n+1),30000)}}})();return()=>{controller.abort();clearTimeout(timer)}},[token,revision,hidden,importing]);

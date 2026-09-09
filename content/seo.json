@@ -1,0 +1,56 @@
+{
+  "slug": "whenwillidie",
+  "title": "WhenWillIDie",
+  "description": "Explore a playful calendar date from adult age and a published population life table. WhenWillIDie is entertainment, never a prediction of your actual death.",
+  "attribution": "A playful look at time, connected through FinchNode.",
+  "domain": "whenwillidieclub.com",
+  "purpose": "Entertainment-only population longevity estimate",
+  "theme": "Midnight plum and orange mortality club",
+  "workflow": "Import only demographic details, derive adult age from the source birth date, and explicitly reveal an entertainment date calculated from published population life expectancy. No medical diagnoses or individual mortality prediction.",
+  "organizationSlug": "whenwillidie-club",
+  "repository": "https://github.com/whenwillidie-club/app",
+  "liveUrl": "https://whenwillidie.onrender.com/",
+  "repositoryStatus": "public",
+  "renderStatus": "live",
+  "homepage": "individually designed full website",
+  "importRoute": "/#/import",
+  "subject": "Life expectancy calculator for entertainment",
+  "color": "#63345f",
+  "paper": "#fbf4ed",
+  "label": "Behind the crystal ball",
+  "article": "how-the-playful-date-is-calculated",
+  "headline": "How the playful date is calculated",
+  "summary": "The inputs, arithmetic and deliberate limitations behind an entertainment-only population life expectancy date.",
+  "topics": [
+    "life-expectancy",
+    "life-table",
+    "entertainment",
+    "population-statistics"
+  ],
+  "sections": [
+    [
+      "A precise date from an imprecise idea",
+      "WhenWillIDie turns a population life-table value into a calendar curiosity. The resulting day looks precise because calendars are precise; it is not a prediction about a person. The interface makes that distinction explicit before revealing anything. The purpose is a playful prompt to think about time, not a medical assessment or a measure of personal risk."
+    ],
+    [
+      "The input is adult age",
+      "The implemented connection requests demographics only. It uses the supplied birth date to calculate adult age; it does not analyze diagnoses, medications, laboratory results or family history. Missing, invalid or future birth dates do not produce a result. The interface also declines ages below 18 or above 100. Import availability still depends on production activation."
+    ],
+    [
+      "The published table",
+      "The calculation uses the SSA 2023 period life table associated with the 2026 Trustees Report. The default is an equal average of its male and female remaining-life-expectancy columns for the relevant age. It does not infer a person’s gender from a record. This default is an arithmetic choice for the experience, not a personalized actuarial model."
+    ],
+    [
+      "From expectancy to a calendar",
+      "The app adds the selected table expectancy to the calculation date to display a playful future date. That operation does not supply information about the circumstances or actual timing of anyone’s death. Different table choices and assumptions can yield different dates. The visitor must acknowledge the entertainment limitation and explicitly choose to reveal the result."
+    ],
+    [
+      "The birthday connection",
+      "FinchNode is used for the authorized demographics handoff in the source implementation. It does not supply the life table or endorse the entertainment output. The authorization flow requires production activation before live demographics imports become available. The repository exposes the calculation and its tests so the arithmetic can be inspected separately from the playful presentation."
+    ]
+  ],
+  "reference": [
+    "SSA 2023 period life table",
+    "https://www.ssa.gov/OACT/STATS/table4c6.html"
+  ]
+}

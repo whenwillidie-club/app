@@ -1,0 +1,3 @@
+import React from 'react';
+import site from '../content/seo.json';
+export default function Resources(){return <section className="site-resources" aria-labelledby="resources-heading"><p className="resource-label">{site.label}</p><h2 id="resources-heading"><a href={`/guides/${site.article}.html`}>{site.headline}</a></h2><p>{site.summary}</p><nav aria-label="Guides and project information"><a href="/guides/">Search public guides</a><a href="/about.html">About {site.title}</a><a href={site.repository}>View source on GitHub</a></nav><p className="resource-availability">Live record connections are awaiting activation. You can explore the site and guides now. <a href="/about.html">Current availability</a>.</p></section>}

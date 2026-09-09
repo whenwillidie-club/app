@@ -1,6 +1,6 @@
-# WhenWillIDie
+# WhenWillIDie — Life expectancy calculator for entertainment
 
-A playful population longevity estimate. Connected through FinchNode.
+Explore a playful calendar date from adult age and a published population life table. WhenWillIDie is entertainment, never a prediction of your actual death.
 
 **Site:** https://whenwillidie.onrender.com/  
 **Repository:** https://github.com/whenwillidie-club/app
@@ -68,3 +68,22 @@ The homepage illustration/photo was generated for this site. It is decorative ed
 The optional `start_health_import` WebMCP tool only opens import setup; it cannot connect an EHR, grant consent, read medical data, or reveal a date. The tool feature-detects browser support.
 
 The navigation tool was verified in a supported browser WebMCP context: invalid arguments were rejected, and the valid action opened category selection without starting a connection.
+
+<!-- public-discovery -->
+## Public guide and project context
+
+[How the playful date is calculated](https://whenwillidie.onrender.com/guides/how-the-playful-date-is-calculated.html) — The inputs, arithmetic and deliberate limitations behind an entertainment-only population life expectancy date.
+
+[Search WhenWillIDie guides](https://whenwillidie.onrender.com/guides/) · [About the site](https://whenwillidie.onrender.com/about.html) · [Sitemap](https://whenwillidie.onrender.com/sitemap.xml)
+
+WhenWillIDie is a standalone product with its own interface, documentation and repository, prepared for independent business operation and continued development. Its FinchNode integration is documented in the code. Live production activation remains pending.
+
+## Public-page build and discoverability
+
+Edit `content/seo.json` for reviewed article text and site metadata. `npm run build` generates public HTML pages, a sitemap, social metadata and structured data, then prerenders the actual React homepage. `npm run test:seo` checks the built crawl surface after a build. Public guide search filters only public text in the browser; no patient data or search analytics enter the index.
+
+Keep canonical URLs on the deployed origin until a custom domain is registered and configured. Add only public, canonical pages to the sitemap. Validate links, mobile layout and the built HTML after editorial changes. Search engine indexing and rich results are not guaranteed.
+
+## Independent business handoff
+
+[Business handoff](HANDOFF.md) covers product identity, the receiving business’s production setup, domain migration, search verification and ongoing editorial maintenance.
