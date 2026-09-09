@@ -94,3 +94,5 @@ Understand the playful date, compare the available population references, and se
 
 - [Why your playful life-expectancy date can change](https://whenwillidieclub.com/guides/why-the-playful-date-changes.html) — See how completed age, the calculation day and the selected population reference affect WhenWillIDie’s entertainment-only date.
 - [Why WhenWillIDie only requests demographics](https://whenwillidieclub.com/guides/why-the-app-only-requests-demographics.html) — Understand the narrow record scope behind WhenWillIDie’s age-based entertainment calculation and what it deliberately does not analyze.
+
+- [Start a health product with one input you can explain](https://whenwillidieclub.com/guides/start-a-health-product-with-one-needed-input.html) — WhenWillIDie uses its age-based entertainment calculation to examine narrow data scope, explicit product boundaries and the role of a focused connection.

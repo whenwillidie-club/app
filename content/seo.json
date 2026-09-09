@@ -172,6 +172,88 @@
           "url": "https://github.com/whenwillidie-club/app/blob/main/app/life-table.mjs"
         }
       ]
+    },
+    {
+      "slug": "start-a-health-product-with-one-needed-input",
+      "title": "Start a health product with one input you can explain",
+      "description": "WhenWillIDie uses its age-based entertainment calculation to examine narrow data scope, explicit product boundaries and the role of a focused connection.",
+      "published": "2026-09-09",
+      "theme": "minimal-scope",
+      "sections": [
+        {
+          "heading": "Start with the output, then work backward",
+          "paragraphs": [
+            "WhenWillIDie produces a playful calendar date from completed adult age and a fixed population reference table. Its useful design exercise is to ask which input that particular output actually needs. The implemented calculation needs a birth date to derive age; it has no model that consumes diagnoses or medications.",
+            "That makes it a concrete example for a startup deciding where to draw its first product boundary. A richer import does not automatically create a better feature if the feature never uses the additional categories."
+          ]
+        },
+        {
+          "heading": "Choose fewer moving parts for the first version",
+          "paragraphs": [
+            "The calculation, reference selection and reveal interaction are separate from the connection. A developer can inspect how the date is computed without needing a live patient session. The function rejects unsupported inputs rather than substituting a guessed birthday.",
+            "This separation gives the operator a clear explanation of the experience: the data connection supplies an input, and the product applies its documented arithmetic. The output remains entertainment and does not become an individual prognosis because the birthday came from a record."
+          ],
+          "links": [
+            {
+              "label": "WhenWillIDie calculation code",
+              "url": "https://github.com/whenwillidie-club/app/blob/main/app/life-table.mjs"
+            }
+          ]
+        },
+        {
+          "heading": "FinchNode has a deliberately limited role here",
+          "paragraphs": [
+            "WhenWillIDie’s source implementation uses FinchNode for the authorized demographics handoff. The allowed category is enforced on the server. The frontend’s table lookup and reveal choice belong to this product and do not depend on a provider supplying a longevity score.",
+            "That is a useful way to explain a connection provider’s contribution without expanding its role. FinchNode does not produce the playful prediction, supply the reference table or clinically endorse the output."
+          ],
+          "links": [
+            {
+              "label": "Site-specific scopes in the server",
+              "url": "https://github.com/visitquill/finchapps-connect/blob/main/server.mjs"
+            },
+            {
+              "label": "FinchNode’s authorized access model",
+              "url": "https://finchnode.com/"
+            }
+          ]
+        },
+        {
+          "heading": "Write a boundary that survives a redesign",
+          "paragraphs": [
+            "A receiving business may change the visual style, add another way to explore assumptions or decide to accept a manually entered age. Each decision should be evaluated against the stated purpose. A new feature that actually uses another record category would require a fresh review of scope and data handling.",
+            "Avoid collecting a full history merely because the connection can request more categories. The product should explain why each requested input is necessary to the feature the visitor chose."
+          ]
+        },
+        {
+          "heading": "Keep the limits close to the interaction",
+          "paragraphs": [
+            "The current interface requires an acknowledgement before revealing the date and lets the visitor compare population references. It does not use a clinical AI model, supply personal risk estimates or establish an actual date of death. Live demographics imports still await production activation.",
+            "For a small health-related startup, the lesson is practical: an honest, narrow feature can make its implementation and data needs easy to inspect. That clarity is a stronger foundation for further development than a broad promise the code cannot support."
+          ],
+          "links": [
+            {
+              "label": "Reveal flow and explanatory interface",
+              "url": "https://github.com/whenwillidie-club/app/blob/main/app/view.tsx"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "question": "Does more medical history improve this calculation?",
+          "answer": "The implemented function does not use it. Adding categories without changing and validating the feature would only broaden access."
+        },
+        {
+          "question": "Is the birthday connection required for every future version?",
+          "answer": "That is a product decision for the operator. The current source uses an authorized demographics import, while the calculation itself is separately inspectable."
+        }
+      ],
+      "references": [
+        {
+          "label": "WhenWillIDie public source repository",
+          "url": "https://github.com/whenwillidie-club/app"
+        }
+      ]
     }
   ]
 }

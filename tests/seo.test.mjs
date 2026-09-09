@@ -85,3 +85,15 @@ test('every added guide is discoverable from home, search and related guides wit
   for(const q of article.questions||[])assert.ok(html.includes(q.question.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll("'",'&#39;')));
  }
 });
+
+test('sourced articles expose their editorial context, section citations and copyable code',()=>{
+ const escape=text=>String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ for(const a of site.articles){
+  const html=read(`guides/${a.slug}.html`);
+  if(a.editorialNote)assert.ok(html.includes(escape(a.editorialNote)),'editorial context must be visible');
+  for(const s of a.sections){
+   for(const citation of s.links||[]){assert.ok(html.includes(`href="${escape(citation.url)}"`));assert.ok(html.includes(escape(citation.label)));}
+   if(s.code)assert.ok(html.includes(`<code>${escape(s.code)}</code>`),'commands must render as escaped, copyable text');
+  }
+ }
+});
